@@ -1,7 +1,12 @@
+// var Game = {
+//   w: 800,
+//   h: 600
+// };
 var Game = {
-  w: 800,
-  h: 600
+  w: 600,
+  h: 800
 };
+
 
 // var w = 800;
 // var h = 600;
@@ -19,10 +24,10 @@ Game.Boot.prototype = {
     this.game.load.bitmapFont('minecraftia', 'assets/fonts/font.png', 'assets/fonts/font.xml'); //load default font
 
 
-    // //Scale Image to Fit Window
-    // this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-    // this.game.scale.maxHeight = window.innerHeight;
-    // this.game.scale.maxWidth = window.innerHeight*(Game.w/Game.h);
+    //Scale Image to Fit Window
+    this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+    this.game.scale.maxHeight = window.innerHeight;
+    this.game.scale.maxWidth = window.innerHeight*(Game.w/Game.h);
 
   },
   create: function() {
@@ -50,6 +55,7 @@ Game.Load.prototype = {
     this.game.load.image('twitter','assets/images/twitter.png');
     this.game.load.spritesheet('npcs', '/assets/images/npcs.png', 64, 64, 25);
 
+    this.game.load.image('cart','assets/images/cart.png');
 
     // Music Track
     // this.game.load.audio('music','soundtrack.mp3');

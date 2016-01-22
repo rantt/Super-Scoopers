@@ -42,31 +42,36 @@ Game.Play.prototype = {
     sKey = this.game.input.keyboard.addKey(Phaser.Keyboard.S);
     dKey = this.game.input.keyboard.addKey(Phaser.Keyboard.D);
     // muteKey = game.input.keyboard.addKey(Phaser.Keyboard.M);
+    
+    //Actors
+    this.actor = new Actor(this.game, 500, ['cone','vanilla','chocolate','strawberry'], 1000);
+    //Table
+    // var table = this.game.add.sprite(Game.w/2, Game.h-150, this.makeBox(600,300));
+    var table = this.game.add.sprite(Game.w/2, Game.h-150, 'cart');
+    table.anchor.setTo(0.5);
+    // table.tint = 0x808080;
 
     
     this.placedOrder = new Icecream(this.game, Game.w/2, Game.h/2);
 
-    this.chocolate_button = this.game.add.button(50,Game.h-200, this.makeCircle(50, '#8B4513'), function() {
+    this.chocolate_button = this.game.add.button(40,Game.h-260, this.makeCircle(50, '#8B4513'), function() {
       this.placedOrder.add('chocolate');
     }, this);
 
-    this.strawberry_button = this.game.add.button(125,Game.h-200, this.makeCircle(50, '#FDD7E4'), function() {
+    this.strawberry_button = this.game.add.button(115,Game.h-260, this.makeCircle(50, '#FDD7E4'), function() {
       this.placedOrder.add('strawberry');
     }, this);
-    this.vanilla_button = this.game.add.button(200,Game.h-200, this.makeCircle(50, '#FFFFFF'), function() {
+    this.vanilla_button = this.game.add.button(190,Game.h-260, this.makeCircle(50, '#FFFFFF'), function() {
       this.placedOrder.add('vanilla');
     },this);
     
-    this.cone_button = this.game.add.button(Game.w-175,Game.h-200, this.makeCone(50,'#F0E68C'), function() {
+    this.cone_button = this.game.add.button(Game.w-100,Game.h-265, this.makeCone(50,'#F0E68C'), function() {
       this.placedOrder.add('cone');
     }, this);
     this.waffle_cone_button = this.game.add.button(Game.w-100,Game.h-200, this.makeCone(50,'#8B4513'), function() {
       this.placedOrder.add('waffle_cone');
     }, this);
     
-
-    //Actors
-    this.actor = new Actor(this.game, 500, ['cone','vanilla','chocolate','strawberry'], 1000);
 
 
     //Create Twitter button as invisible, show during win condition to post highscore
