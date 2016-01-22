@@ -48,6 +48,8 @@ Game.Load.prototype = {
 
     //Load button for twitter
     this.game.load.image('twitter','assets/images/twitter.png');
+    this.game.load.spritesheet('npcs', '/assets/images/npcs.png', 64, 64, 25);
+
 
     // Music Track
     // this.game.load.audio('music','soundtrack.mp3');

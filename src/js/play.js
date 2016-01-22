@@ -5,10 +5,10 @@
  * Using Math.round() will give you a non-uniform distribution!
  */
 
-// // Choose Random integer in a range
-// function rand (min, max) {
-//     return Math.floor(Math.random() * (max - min + 1)) + min;
-// }
+// Choose Random integer in a range
+function rand (min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 
 // var musicOn = true;
 
@@ -29,6 +29,8 @@ Game.Play.prototype = {
     this.game.world.setBounds(0, 0 ,Game.w ,Game.h);
 		this.game.stage.backgroundColor = '#fffacd';
 
+    this.order_timer = this.game.time.now;
+
     // // Music
     // this.music = this.game.add.sound('music');
     // this.music.volume = 0.5;
@@ -41,14 +43,11 @@ Game.Play.prototype = {
     dKey = this.game.input.keyboard.addKey(Phaser.Keyboard.D);
     // muteKey = game.input.keyboard.addKey(Phaser.Keyboard.M);
 
-    // this.strawberry = this.game.add.sprite(100,100, this.makeBox(40, 40));
-    // this.strawberry.tint = 0xff0000;
+    // this.placedOrder = [];
+    // this.placedOrderGroup = this.game.add.group(); 
+    // this.currentOrder;
 
-    this.placedOrder = [];
-
-    // this.chocolate_button = this.game.add.sprite(50,Game.h-200, this.makeCircle(50, '#8B4513'));
     this.chocolate_button = this.game.add.button(50,Game.h-200, this.makeCircle(50, '#8B4513'), this.addScoop, this);
-    // this.strawberry_button = this.game.add.sprite(125,Game.h-200, this.makeCircle(50, '#FDD7E4'));
     this.strawberry_button = this.game.add.button(125,Game.h-200, this.makeCircle(50, '#FDD7E4'), this.addScoop, this);
     this.vanilla_button = this.game.add.button(200,Game.h-200, this.makeCircle(50, '#FFFFFF'), this.addScoop, this);
 
@@ -56,52 +55,90 @@ Game.Play.prototype = {
     this.waffle_cone_button = this.game.add.button(Game.w-100,Game.h-200, this.makeCone(50,'#8B4513'), this.placeCone, this);
 
 
+    //Actors
+    this.actor = new Actor(this.game, 500, ['cone','vanilla'], 1000);
+    this.actor.walk();
+
+    this.icecream = new Icecream(this.game, Game.w/2, Game.h/2-100, ['cone', 'vanilla', 'strawberry', 'chocolate'],0.5);
+
     //Create Twitter button as invisible, show during win condition to post highscore
     this.twitterButton = this.game.add.button(this.game.world.centerX, this.game.world.centerY + 200,'twitter', this.twitter, this);
     this.twitterButton.anchor.set(0.5);
     this.twitterButton.visible = false;
 
   },
+  makeOrder: function(size) {
+    
+    var order = [];
+    this.order_timer = this.game.time.now + 10000;
+    var cone = rand(0,1); 
+    switch (cone) {
+      case 0:
+        order.push('cone');
+        break;
+      case 1:
+        order.push('waffle_cone');
+        break;
+    }
+
+    var scoop;
+    for(var i=0;i<size;i++) {
+      scoop = rand(0,2);
+      switch (scoop) {
+        case 1:
+          order.push('chocolate');
+          break;
+        case 2:
+          order.push('strawberry');
+          break;
+        default:
+          order.push('vanilla');
+      } 
+    }
+    return order;
+  },
   addScoop: function(button) {
+    if (toppingHeight === 0)
+      return;
+
     var scoop = this.game.add.sprite(Game.w/2, -50, this.makeCircle(50,'#FFF'));
     toppingHeight += 15;
-    this.placedOrder.push('icecream');
 
-    // if (this.vanilla_button === button) {
-      // var scoop = this.game.add.sprite(Game.w/2, -50, this.makeCircle(50,'#FFF'));
-      // this.placedOrder.push(scoop);
-    // }
-    if (this.chocolate_button === button) {
+    if (this.vanilla_button === button) {
+      this.placedOrder.push('vanilla');
+    } else if (this.chocolate_button === button) {
       scoop.tint = 0x8B4513;
+      this.placedOrder.push('chocolate');
     }else if (this.strawberry_button === button) {
       scoop.tint = 0xFDD7E4;
+      this.placedOrder.push('strawberry');
     }
+
+    this.placedOrderGroup.add(scoop);
     var t = this.game.add.tween(scoop).to({y: Game.h/2+200-toppingHeight}, 300, Phaser.Easing.Quadratic.InOut).start();
+    console.log(this.placedOrder);
   },
   placeCone: function(button) {
     if (toppingHeight > 0) 
-      return
+      return;
+
+    var cone = this.game.add.sprite(Game.w/2, -50, this.makeCone(50,'#FFF'));
 
     if (this.cone_button === button) {
-      console.log('reg cone');
-      var cone = this.game.add.sprite(Game.w/2, -50, this.makeCone(50,'#F0E68C'));
+      cone.tint = 0xF0E68C;
       toppingHeight += 50;
       this.placedOrder.push('cone');
-      // this.placedOrder.push(cone);
       var t = this.game.add.tween(cone).to({y: Game.h/2+200-toppingHeight}, 300, Phaser.Easing.Quadratic.InOut).start();
       toppingHeight += 15;
     }else if (this.waffle_cone_button === button) {
+      cone.tint = 0x8B4513;
       toppingHeight += 50;
-      // this.placedOrder.push('waffle_cone');
-      console.log('waffle cone');
-      var waffle_cone = this.game.add.sprite(Game.w/2, -50, this.makeCone(50,'#8B4513'));
-      // this.placedOrder.push(waffle_cone);
-      this.placedOrder.push('cone');
-      this.placedOrder.push(waffle_cone);
-      var t = this.game.add.tween(waffle_cone).to({y: Game.h/2+200-toppingHeight}, 300, Phaser.Easing.Quadratic.InOut).start();
+      this.placedOrder.push('waffle_cone');
+      var t = this.game.add.tween(cone).to({y: Game.h/2+200-toppingHeight}, 300, Phaser.Easing.Quadratic.InOut).start();
       toppingHeight += 15;
-      // console.log(this.placedOrder);
     }
+
+    this.placedOrderGroup.add(cone);
     console.log(this.placedOrder);
   },
   makeCone: function(size, color) {
@@ -132,6 +169,25 @@ Game.Play.prototype = {
   },
   update: function() {
 
+
+    if (this.game.time.now > this.order_timer) {
+      this.currentOrder = this.makeOrder(3);
+      console.log(this.currentOrder);
+    }
+
+    if (JSON.stringify(this.currentOrder) === JSON.stringify(this.placedOrder)) {
+      console.log('order up');
+      this.placedOrderGroup.forEach(function(s) {
+        s.kill();
+      },this);
+      toppingHeight = 0;
+      this.order_timer = this.game.time.now + 10000;
+      this.placedOrder = [];
+      this.currentOrder = this.makeOrder(3);
+      console.log(this.currentOrder);
+    }
+
+
     // // Toggle Music
     // muteKey.onDown.add(this.toggleMute, this);
 
@@ -154,8 +210,9 @@ Game.Play.prototype = {
   //     this.music.volume = 0.5;
   //   }
   // },
-  // render: function() {
-  //   game.debug.text('Health: ' + tri.health, 32, 96);
-  // }
+  render: function() {
+    // this.game.debug.text('Health: ' + tri.health, 32, 96);
+    this.game.debug.body(this.actor); 
+  }
 
 };
