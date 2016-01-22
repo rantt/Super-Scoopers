@@ -1,7 +1,11 @@
 var Actor = function(game, delay, order, wait) {
   this.game = game;
-  this.delay = this.game.time.now;
+  this.delay = this.game.time.now + this.delay;
+  this.walk_time = 2000;
+  this.wait = this.delay + this.walk_time + wait;
   this.order = order;
+  this.orderReceived = false;
+  this.icecream;
 
   //delay - time to wait before walking out on the screen
   //order - what the actor will ask for
@@ -12,22 +16,37 @@ var Actor = function(game, delay, order, wait) {
   this.scale.x = 2;
   this.scale.y = 2;
   this.game.add.existing(this);
+  this.walkin();
 };
 
 Actor.prototype = Object.create(Phaser.Sprite.prototype);
-Actor.prototype.walk = function() {
+Actor.prototype.walkin = function() {
   if (this.walking) {return;}
   this.walking = true;
 
   var t = this.game.add.tween(this)
-            .to({x:Game.w/2-50}, 2000, Phaser.Easing.Linear.None)
+            .to({x:Game.w/2-50}, this.walk_time, Phaser.Easing.Linear.None)
             .start()
   this.frame = 3;
 
   t.onComplete.add(function() {
-    var icecream = new Icecream(this.game, Game.w/2-50, Game.h/2-50, this.order,0.5);
+    this.icecream = new Icecream(this.game, Game.w/2-125, Game.h/2-150, this.order,0.5);
     this.walking = false;
     this.frame = 0;
   },this);
 };
+Actor.prototype.walkout = function() {
+  if (this.walking) {return;}
+  this.walking = true;
+  this.frame = 3;
+  var t = this.game.add.tween(this)
+            .to({x:-100}, this.walk_time, Phaser.Easing.Linear.None)
+            .start()
+
+  t.onComplete.add(function() {
+    this.icecream.kill();
+    this.walking = false;
+  },this);
+};
+
 Actor.prototype.constructor = Actor;
