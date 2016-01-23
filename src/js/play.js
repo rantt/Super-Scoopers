@@ -125,7 +125,7 @@ Game.Play.prototype = {
       this.game.state.start('Menu');
     }
 
-    if (this.actor.active === true && this.game.time.now > this.actor.wait && this.actor.alive == true) {
+    if (this.actor.active === true && this.game.time.now > this.actor.wait && this.actor.alive === true) {
 
       money = money - this.placedOrder.toppings.length;
       this.moneyText.setText('$' + money);
@@ -133,7 +133,7 @@ Game.Play.prototype = {
         this.moneyText.tint = 0xff0000;
       }
 
-      this.actor.walkout()
+      this.actor.walkout();
       this.placedOrder.kill();
       this.placedOrder = new Icecream(this.game, Game.w/2, Game.h/2);
       
@@ -142,9 +142,9 @@ Game.Play.prototype = {
     // console.log(JSON.stringify(this.actor.order)+' '+ JSON.stringify(this.placedOrder.toppings));
     if (JSON.stringify(this.actor.order) === JSON.stringify(this.placedOrder.toppings) && this.actor.alive === true) {
       
-      if (strikes < 1) {this.strike1.visible = false}
-      if (strikes < 2) {this.strike2.visible = false}
-      if (strikes < 3) {this.strike3.visible = false}
+      if (strikes < 1) {this.strike1.visible = false;}
+      if (strikes < 2) {this.strike2.visible = false;}
+      if (strikes < 3) {this.strike3.visible = false;}
 
 
       money += this.placedOrder.toppings.length*2;
@@ -174,9 +174,9 @@ Game.Play.prototype = {
         strikes++;
       }
 
-      if (strikes > 0) {this.strike1.visible = true}
-      if (strikes > 1) {this.strike2.visible = true}
-      if (strikes > 2) {this.strike3.visible = true}
+      if (strikes > 0) {this.strike1.visible = true;}
+      if (strikes > 1) {this.strike2.visible = true;}
+      if (strikes > 2) {this.strike3.visible = true;}
 
       if (customers < 5) {
         delay = 6000;   

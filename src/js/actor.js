@@ -43,7 +43,7 @@ Actor.prototype.walkin = function() {
 
   var t = this.game.add.tween(this)
             .to({x:Game.w/2-50}, this.walk_time, Phaser.Easing.Linear.None)
-            .start()
+            .start();
   this.frame = this.walking_frame;
 
   t.onComplete.add(function() {
@@ -60,7 +60,7 @@ Actor.prototype.walkin = function() {
           frame = 2;
         }
       }
-      var speech = this.game.add.sprite(Game.w/2-200, Game.h/2-100-100*j, 'speech',frame)
+      var speech = this.game.add.sprite(Game.w/2-200, Game.h/2-100-100*j, 'speech',frame);
       speech.anchor.setTo(0.5);
       speech.scale.x = 2;
       speech.scale.y = 2;
@@ -85,7 +85,7 @@ Actor.prototype.walkout = function() {
     this.icecream.mycone.forEach(function(s) {
       this.game.add.tween(s)
             .to({x:-100, y: s.y+200}, this.walk_time+200, Phaser.Easing.Linear.None)
-            .start()
+            .start();
     },this);
   }
 
@@ -93,7 +93,7 @@ Actor.prototype.walkout = function() {
   this.frame = this.walking_frame;
   var t = this.game.add.tween(this)
             .to({x:-100}, this.walk_time, Phaser.Easing.Linear.None)
-            .start()
+            .start();
 
   t.onComplete.add(function() {
     this.kill();
