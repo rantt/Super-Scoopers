@@ -47,8 +47,7 @@ Game.Play.prototype = {
 
     // Music
     this.music = this.game.add.sound('music');
-    this.music.volume = 0.5;
-    this.music.play('',0,1,true);
+    this.music.play('',0,0.5,true);
 
     //Setup WASD and extra keys
     wKey = this.game.input.keyboard.addKey(Phaser.Keyboard.W);
