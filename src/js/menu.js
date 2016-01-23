@@ -1,4 +1,5 @@
 /*global Game*/
+var strikes = 0;
 Game.Menu = function(game){
   this.game = game;
 };
@@ -41,6 +42,7 @@ Game.Menu.prototype =  {
     update: function() {
       //Click to Start
       if (this.game.input.activePointer.isDown){
+        strikes = 0;
         this.game.state.start('Play');
       }
     }
