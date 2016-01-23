@@ -64,6 +64,7 @@ Actor.prototype.walkin = function() {
       speech.anchor.setTo(0.5);
       speech.scale.x = 2;
       speech.scale.y = 2;
+      speech.tint = 0xdcdcdc;
       this.speech.add(speech);
     }
 
