@@ -1,6 +1,6 @@
 #Super Scoopers (#onegameaweek - Game 3)
 
-
+Scooping Icecream as fast as you can.
 
 ![screenshot](screenshots/screenshot.png)
 
