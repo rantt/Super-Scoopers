@@ -43,10 +43,24 @@ Game.Menu.prototype =  {
           var scoreText = this.game.add.bitmapText(Game.w/2, Game.h-200, 'minecraftia', 'High Score: $'+this.highestScore, 48); 
           scoreText.tint = 0xffff00;
           scoreText.anchor.setTo(0.5);
+
+          //Create Twitter button as invisible, show during win condition to post highscore
+          this.twitterButton = this.game.add.button(this.game.world.centerX, this.game.world.centerY + 300,'twitter', this.twitter, this);
+          this.twitterButton.anchor.set(0.5);
+          // this.twitterButton.visible = false;
+
         }
 
 
 
+    },
+    twitter: function() {
+      //Popup twitter window to post highscore
+      var game_url = 'http://www.divideby5.com/games/superscoopers/'; 
+      var twitter_name = 'rantt_';
+      var tags = ['onegameaweek'];
+
+      window.open('http://twitter.com/share?text=My+best+score+is+$'+this.highestScore+'+playing+Super+Scoopers+See+if+you+can+beat+it.+at&via='+twitter_name+'&url='+game_url+'&hashtags='+tags.join(','), '_blank');
     },
     update: function() {
       //Click to Start
