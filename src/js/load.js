@@ -7,6 +7,7 @@ var Game = {
   h: 800
 };
 
+
 if (localStorage.getItem('atSuperScoopersHighestScore') === null) {
   localStorage.setItem('atSuperScoopersHighestScore', 0);
 }
@@ -71,6 +72,5 @@ Game.Load.prototype = {
   },
   create: function() {
     this.game.state.start('Menu');
-    // this.game.state.start('Play');
   }
 };

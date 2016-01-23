@@ -43,11 +43,13 @@ Game.Play.prototype = {
 		this.game.stage.backgroundColor = '#63E1FF';
 
     this.highestScore = parseInt(JSON.parse(localStorage.getItem('atSuperScoopersHighestScore')));
-    // this.order_timer = this.game.time.now;
 
     // Music
     this.music = this.game.add.sound('music');
-    this.music.play('',0,0.5,true);
+    this.music.volume = 0.5;
+    this.music.loop = true;
+    this.music.play();
+
 
     //Setup WASD and extra keys
     wKey = this.game.input.keyboard.addKey(Phaser.Keyboard.W);
