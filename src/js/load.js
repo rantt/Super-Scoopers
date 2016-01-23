@@ -56,14 +56,14 @@ Game.Load.prototype = {
 
     //Load button for twitter
     this.game.load.image('twitter','assets/images/twitter.png');
-    this.game.load.spritesheet('npcs', '/assets/images/npcs.png', 256, 256, 25);
+    this.game.load.spritesheet('npcs', 'assets/images/npcs.png', 256, 256, 25);
 
     this.game.load.image('cart','assets/images/cart.png');
-    this.game.load.spritesheet('speech', '/assets/images/speech.png', 50, 50, 3);
+    this.game.load.spritesheet('speech', 'assets/images/speech.png', 50, 50, 3);
 
-    this.game.load.spritesheet('cones', '/assets/images/cones.png', 64, 64, 4);
-    this.game.load.spritesheet('scoops', '/assets/images/scoops-sheet.png', 64, 64, 3);
-    this.game.load.image('strike','/assets/images/strike.png');
+    this.game.load.spritesheet('cones', 'assets/images/cones.png', 64, 64, 4);
+    this.game.load.spritesheet('scoops', 'assets/images/scoops-sheet.png', 64, 64, 3);
+    this.game.load.image('strike','assets/images/strike.png');
 
     // Music Track
     // this.game.load.audio('music','soundtrack.mp3');
