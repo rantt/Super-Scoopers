@@ -13,19 +13,18 @@ var Icecream = function(game, x, y, toppings, scale) {
     }
     switch (this.toppings[i]) {
       case 'cone': 
-        this.mycone.add(this.game.add.sprite(this.xpos, this.ypos+200-this.toppingHeight, this.makeCone(50, '#F0E68C')));
+        this.mycone.add(this.game.add.sprite(this.xpos, this.ypos+200-this.toppingHeight, 'cones',2 ));
         break;
       case 'waffle_cone': 
-        this.mycone.add(this.game.add.sprite(this.xpos, this.ypos+200-this.toppingHeight, this.makeCone(50, '#F0E68C')));
-        break;
+        this.mycone.add(this.game.add.sprite(this.xpos, this.ypos+200-this.toppingHeight, 'cones',3)); break;
       case 'vanilla':
-        this.mycone.add(this.game.add.sprite(this.xpos, this.ypos+200-this.toppingHeight, this.makeCircle(50,'#FFF')));
+        this.mycone.add(this.game.add.sprite(this.xpos, this.ypos+200-this.toppingHeight, 'scoops',0));
         break;
       case 'strawberry':
-        this.mycone.add(this.game.add.sprite(this.xpos, this.ypos+200-this.toppingHeight, this.makeCircle(50,'#FDD7E4')));
+        this.mycone.add(this.game.add.sprite(this.xpos, this.ypos+200-this.toppingHeight, 'scoops', 1));
         break;
       case 'chocolate':
-        this.mycone.add(this.game.add.sprite(this.xpos, this.ypos+200-this.toppingHeight, this.makeCircle(50,'#8B4513')));
+        this.mycone.add(this.game.add.sprite(this.xpos, this.ypos+200-this.toppingHeight, 'scoops',2 ));
         break;
     }
     this.toppingHeight += 15*this.scale;
@@ -57,19 +56,18 @@ Icecream.prototype.add = function(topping_name) {
     }
     switch (topping_name) {
       case 'cone': 
-        topping = this.game.add.sprite(this.xpos, this.ypos+200-this.toppingHeight, this.makeCone(50, '#F0E68C'))
+        topping = this.game.add.sprite(this.xpos, this.ypos+200-this.toppingHeight, 'cones',2 );
         break;
       case 'waffle_cone': 
-        topping = this.game.add.sprite(this.xpos, this.ypos+200-this.toppingHeight, this.makeCone(50, '#8B4513'))
-        break;
+        topping = this.game.add.sprite(this.xpos, this.ypos+200-this.toppingHeight, 'cones',3); break;
       case 'vanilla':
-        topping = this.game.add.sprite(this.xpos, this.ypos+200-this.toppingHeight, this.makeCircle(50,'#FFF'))
+        topping = this.game.add.sprite(this.xpos, this.ypos+200-this.toppingHeight, 'scoops',0);
         break;
       case 'strawberry':
-        topping = this.game.add.sprite(this.xpos, this.ypos+200-this.toppingHeight, this.makeCircle(50,'#FDD7E4'))
+        topping = this.game.add.sprite(this.xpos, this.ypos+200-this.toppingHeight, 'scoops', 1);
         break;
       case 'chocolate':
-        topping = this.game.add.sprite(this.xpos, this.ypos+200-this.toppingHeight, this.makeCircle(50,'#8B4513'))
+        topping = this.game.add.sprite(this.xpos, this.ypos+200-this.toppingHeight, 'scoops',2 );
         break;
     }
     this.toppingHeight += 15*this.scale;
@@ -85,23 +83,5 @@ Icecream.prototype.kill = function() {
   this.mycone.forEach(function(topping) {
     topping.kill();
   },this);
-};
-Icecream.prototype.makeCone = function(size, color) {
-  var bmd = this.game.add.bitmapData(size, size);
-  bmd.ctx.clearRect(0,0,size,size);
-  bmd.ctx.strokeStyle = '#FFF';
-  bmd.ctx.fillStyle = color;
-  bmd.ctx.lineWidth = 2;
-  bmd.ctx.beginPath();
-  bmd.ctx.moveTo(0, 0);
-  bmd.ctx.lineTo(size/2, size);
-  bmd.ctx.lineTo(size, 0);
-  bmd.ctx.fill();
-  return bmd;
-};
-Icecream.prototype.makeCircle = function(circSize, color) {
-  var bmd = this.game.add.bitmapData(circSize, circSize);
-  bmd.circle(circSize/2,circSize/2,circSize/2, color);
-  return bmd;
 };
 Icecream.prototype.constructor = Icecream;
