@@ -42,7 +42,6 @@ Icecream.prototype.add = function(topping_name) {
     var topping;
 
     if ((this.toppings.length === 0) && (topping_name !== 'cone' && topping_name !== 'waffle_cone')) {
-        console.log(topping_name + this.toppings.length);
         return;
     }
 
@@ -52,7 +51,6 @@ Icecream.prototype.add = function(topping_name) {
 
     if (this.toppings.length == 1) {
         this.toppingHeight += 15*this.scale;
-        console.log('load');
     }
     switch (topping_name) {
       case 'cone': 

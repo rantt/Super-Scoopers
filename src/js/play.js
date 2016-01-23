@@ -121,7 +121,7 @@ Game.Play.prototype = {
         this.highestScore = money;
         localStorage.setItem('atSuperScoopersHighestScore', money);
       }
-
+      this.music.stop();
       this.game.state.start('Menu');
     }
 
@@ -139,7 +139,6 @@ Game.Play.prototype = {
       
     }
 
-    // console.log(JSON.stringify(this.actor.order)+' '+ JSON.stringify(this.placedOrder.toppings));
     if (JSON.stringify(this.actor.order) === JSON.stringify(this.placedOrder.toppings) && this.actor.alive === true) {
       
       if (strikes < 1) {this.strike1.visible = false;}

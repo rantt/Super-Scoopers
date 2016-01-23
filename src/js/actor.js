@@ -49,7 +49,6 @@ Actor.prototype.walkin = function() {
   t.onComplete.add(function() {
     this.active = true;
     this.wait = this.game.time.now + this.wait;
-    console.log('order height'+(this.order.length*15));
     this.speech = this.game.add.group();
 
     var limit = 2;
