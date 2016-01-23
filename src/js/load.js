@@ -66,7 +66,7 @@ Game.Load.prototype = {
     this.game.load.image('strike','assets/images/strike.png');
 
     // Music Track
-    // this.game.load.audio('music','soundtrack.mp3');
+    this.game.load.audio('music','assets/audio/music_box_monster.mp3');
 
   },
   create: function() {

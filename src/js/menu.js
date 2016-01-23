@@ -38,6 +38,15 @@ Game.Menu.prototype =  {
         var clickText = this.game.add.bitmapText(Game.w/2, Game.h/2+50, 'minecraftia', '~click to start~', 24); 
         clickText.anchor.setTo(0.5);
 
+        this.highestScore = parseInt(JSON.parse(localStorage.getItem('atSuperScoopersHighestScore')));
+        if (this.highestScore > 0) {
+          var scoreText = this.game.add.bitmapText(Game.w/2, Game.h-200, 'minecraftia', 'High Score: $'+this.highestScore, 48); 
+          scoreText.tint = 0xffff00;
+          scoreText.anchor.setTo(0.5);
+        }
+
+
+
     },
     update: function() {
       //Click to Start

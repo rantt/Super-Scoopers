@@ -45,10 +45,10 @@ Game.Play.prototype = {
     this.highestScore = parseInt(JSON.parse(localStorage.getItem('atSuperScoopersHighestScore')));
     // this.order_timer = this.game.time.now;
 
-    // // Music
-    // this.music = this.game.add.sound('music');
-    // this.music.volume = 0.5;
-    // this.music.play('',0,1,true);
+    // Music
+    this.music = this.game.add.sound('music');
+    this.music.volume = 0.5;
+    this.music.play('',0,1,true);
 
     //Setup WASD and extra keys
     wKey = this.game.input.keyboard.addKey(Phaser.Keyboard.W);
@@ -58,7 +58,7 @@ Game.Play.prototype = {
     // muteKey = game.input.keyboard.addKey(Phaser.Keyboard.M);
 
     //Actors
-    this.actor = new Actor(this.game, ['waffle_cone','strawberry'], 3000,10);
+    this.actor = new Actor(this.game, ['waffle_cone','strawberry'], 6000,10);
     this.actor.walkin();
 
     //Table
@@ -180,14 +180,14 @@ Game.Play.prototype = {
       if (strikes > 2) {this.strike3.visible = true}
 
       if (customers < 5) {
-        delay = 7000;   
+        delay = 6000;   
         scoopmax = 1;
       }else if (customers < 10) {
         delay = 6000;   
         scoopmax = 2;
         this.lvlText.setText('Lvl: '+levelNames[1]);
       }else if (customers < 15) {
-        delay = 7000;   
+        delay = 6000;   
         scoopmax = 3;
         this.lvlText.setText('Lvl: '+levelNames[2]);
       }else if (customers < 20) {
